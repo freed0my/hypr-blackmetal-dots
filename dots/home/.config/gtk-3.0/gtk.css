@@ -1,0 +1,432 @@
+/* Thunar / GTK3 — kitty blackmetal (Gothic Cathedral)
+ * Borders like inactive Hyprland windows, square corners, tight padding.
+ */
+
+@define-color bg          #080708;
+@define-color surface     #121012;
+@define-color surface_alt #211D21;
+@define-color frame       #2D2D2D;
+
+@define-color text        #C4C0C4;
+@define-color text_sec    #8C858C;
+@define-color text_dim    #3A353A;
+@define-color accent      #E0DCE0;
+
+@define-color wine        #7F263C;
+@define-color wine_alt    #A8324D;
+@define-color mauve       #4B3A43;
+@define-color select      #3A2D35;
+
+
+/* Base */
+* {
+    outline-width: 0;
+    border-radius: 0;
+}
+
+window,
+.background {
+    background-color: @bg;
+    color: @text;
+}
+
+window > box {
+    background-color: @bg;
+}
+
+separator,
+paned > separator {
+    background-color: @frame;
+    background-image: none;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+
+/* Headerbars / toolbars */
+headerbar,
+.titlebar,
+toolbar,
+menubar {
+    background-color: @bg;
+    background-image: none;
+    color: @text;
+    border: none;
+    border-bottom: 1px solid @frame;
+    box-shadow: none;
+    padding: 2px 4px;
+    min-height: 0;
+}
+
+headerbar:backdrop,
+.titlebar:backdrop {
+    background-color: @bg;
+    color: @text_sec;
+}
+
+toolbar button {
+    padding: 3px 6px;
+    min-height: 0;
+    min-width: 0;
+}
+
+
+/* Main file view */
+.view,
+iconview,
+treeview,
+treeview.view {
+    background-color: @bg;
+    color: @text;
+}
+
+treeview.view header button {
+    background-color: @bg;
+    color: @text_sec;
+    border: none;
+    border-bottom: 1px solid @frame;
+    padding: 2px 6px;
+}
+
+.view:selected,
+iconview:selected,
+treeview.view:selected,
+.view:selected:focus,
+iconview:selected:focus,
+treeview.view:selected:focus {
+    background-color: @select;
+    color: @accent;
+}
+
+.view:hover:not(:selected),
+iconview:hover:not(:selected) {
+    background-color: @surface_alt;
+}
+
+.view rubberband,
+rubberband {
+    background-color: alpha(@mauve, 0.35);
+    border: 1px solid @mauve;
+}
+
+
+/* Sidebar */
+.sidebar,
+.sidebar.view,
+placessidebar,
+placessidebar list,
+placessidebar list row {
+    background-color: @bg;
+    color: @text_sec;
+}
+
+.sidebar row,
+placessidebar row {
+    padding: 2px 6px;
+    min-height: 26px;
+}
+
+.sidebar row:selected,
+placessidebar row:selected,
+.sidebar.view:selected {
+    background-color: @surface_alt;
+    color: @accent;
+}
+
+.sidebar row:hover:not(:selected),
+placessidebar row:hover:not(:selected) {
+    background-color: @surface;
+    color: @text;
+}
+
+
+/* Path / location entry and search */
+entry,
+.search-bar entry,
+.path-bar {
+    background-color: @surface;
+    background-image: none;
+    color: @text;
+    border: 1px solid @frame;
+    box-shadow: none;
+    caret-color: @accent;
+    min-height: 26px;
+    padding: 0 8px;
+}
+
+entry:focus,
+.search-bar entry:focus {
+    border-color: @mauve;
+    box-shadow: none;
+}
+
+entry selection,
+.search-bar entry selection,
+selection {
+    background-color: @select;
+    color: @accent;
+}
+
+.path-bar button {
+    padding: 2px 8px;
+    min-height: 0;
+}
+
+
+/* Buttons */
+button {
+    background-color: transparent;
+    background-image: none;
+    color: @text_sec;
+    border: 1px solid transparent;
+    box-shadow: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
+}
+
+button:hover {
+    background-color: @surface_alt;
+    color: @accent;
+}
+
+button:active,
+button:checked {
+    background-color: @select;
+    color: @accent;
+}
+
+button:focus {
+    border-color: @frame;
+}
+
+dialog button,
+.dialog-action-area button {
+    border-color: @frame;
+    padding: 4px 14px;
+}
+
+
+/* Menus */
+menu,
+.menu,
+.context-menu,
+popover,
+popover.background {
+    background-color: @bg;
+    color: @text;
+    border: 1px solid @frame;
+    box-shadow: none;
+    padding: 4px 0;
+}
+
+menu menuitem,
+.menu menuitem {
+    background-color: transparent;
+    color: @text;
+    padding: 4px 12px;
+    min-height: 0;
+}
+
+menu menuitem:hover,
+.menu menuitem:hover {
+    background-color: @surface_alt;
+    color: @accent;
+}
+
+menu menuitem:disabled,
+menu menuitem:disabled label {
+    color: @text_dim;
+}
+
+menu separator {
+    margin: 4px 0;
+}
+
+
+/* Tooltips */
+tooltip,
+tooltip.background {
+    background-color: @bg;
+    color: @text;
+    border: 1px solid @frame;
+}
+
+
+/* Scrollbars */
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    background-color: @text_dim;
+    min-width: 4px;
+    min-height: 4px;
+    border: none;
+}
+
+scrollbar slider:hover {
+    background-color: @text_sec;
+}
+
+
+/* Progress / active controls */
+progressbar trough,
+scale trough {
+    background-color: @surface_alt;
+    border: none;
+}
+
+progressbar progress,
+scale highlight {
+    background-color: @mauve;
+    border: none;
+}
+
+check:checked,
+radio:checked {
+    background-color: @mauve;
+    color: @accent;
+}
+
+
+/* Focus / accent */
+*:focus {
+    outline-color: @frame;
+}
+
+
+/* Destructive / warning states keep the red accent */
+.destructive-action {
+    color: @wine_alt;
+}
+
+.error {
+    color: @wine_alt;
+}
+
+/* Containers (pavucontrol etc.) — remove the base theme's gray background */
+notebook,
+notebook > stack,
+notebook > header,
+stack,
+viewport,
+scrolledwindow,
+frame > border,
+list,
+list row,
+.frame {
+    background-color: @bg;
+    background-image: none;
+    color: @text;
+    border-color: @frame;
+    box-shadow: none;
+}
+
+notebook > header {
+    border-bottom: 1px solid @frame;
+    padding: 0 4px;
+}
+
+notebook > header tab {
+    background-color: transparent;
+    color: @text_sec;
+    border: none;
+    border-bottom: 2px solid transparent;
+    box-shadow: none;
+    padding: 6px 14px;
+    min-height: 0;
+}
+
+notebook > header tab:hover {
+    color: @text;
+}
+
+notebook > header tab:checked {
+    color: @accent;
+    border-bottom: 2px solid @wine_alt;
+    box-shadow: none;
+}
+
+list row:hover {
+    background-color: @bg;
+}
+
+/* Volume sliders */
+scale {
+    padding: 6px 0;
+}
+
+scale trough {
+    min-height: 2px;
+    background-color: @frame;
+}
+
+scale highlight {
+    background-color: @text_sec;
+}
+
+scale slider {
+    min-width: 12px;
+    min-height: 12px;
+    margin: -6px 0;
+    background-color: @accent;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+
+scale slider:hover {
+    background-color: #FFFFFF;
+}
+
+scale marks mark indicator,
+scale mark indicator {
+    color: @text_dim;
+    min-height: 4px;
+}
+
+/* Audio level meter */
+levelbar trough,
+levelbar block {
+    border: none;
+    box-shadow: none;
+    min-height: 2px;
+}
+
+levelbar trough {
+    background-color: transparent;
+}
+
+levelbar block.empty,
+levelbar block.empty-block {
+    background-color: @surface_alt;
+}
+
+levelbar block.filled,
+levelbar block.low,
+levelbar block.high,
+levelbar block.full {
+    background-color: @wine_alt;
+}
+
+/* Dropdowns and switches */
+combobox button,
+combobox box button {
+    background-color: transparent;
+    color: @text_sec;
+    border: 1px solid @frame;
+}
+
+button.toggle:checked,
+togglebutton:checked {
+    background-color: @select;
+    color: @accent;
+}
+
+/* Waybar: no window background */
+window#waybar,
+window#waybar.background,
+window#waybar > box {
+    background-color: transparent;
+}

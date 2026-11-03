@@ -1,0 +1,41 @@
+(deflisten audio :initial '{"master":{"vol":0,"muted":false,"name":""},"apps":[]}'
+  "~/.config/eww-mixer/scripts/audio.py")
+
+(defwidget channel [name vol muted ?onmute ?onchange ?onname]
+  (box :class "channel ${muted ? 'muted' : ''}" :orientation "v" :space-evenly false
+    (box :orientation "h" :space-evenly false
+      (eventbox :cursor "pointer" :onclick onmute :hexpand true
+        (label :class "name" :halign "start" :limit-width 28 :text name))
+      (label :class "value" :halign "end" :text "${muted ? 'mute' : vol}"))
+    (scale :class "slider" :min 0 :max 101 :value vol :round-digits 0
+           :onchange onchange)))
+
+(defwidget mixer []
+  (eventbox :onhoverlost "eww -c ~/.config/eww-mixer close mixer"
+    (box :class "mixer" :orientation "v" :space-evenly false
+      (eventbox :cursor "pointer" :onclick "~/.config/eww-mixer/scripts/next-sink.sh"
+        (box :class "device" :space-evenly false
+          (label :halign "start" :hexpand true :limit-width 34 :text "${audio.master.name}")
+          (label :class "hint" :text "⇄")))
+      (channel :name "master"
+               :vol {audio.master.vol}
+               :muted {audio.master.muted}
+               :onmute "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+               :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%")
+      (box :class "rule")
+      (box :orientation "v" :space-evenly false
+        (for app in {audio.apps}
+          (channel :name {app.name}
+                   :vol {app.vol}
+                   :muted {app.muted}
+                   :onmute "for i in ${app.ids}; do pactl set-sink-input-mute $i ${app.muted ? 0 : 1}; done"
+                   :onchange "for i in ${app.ids}; do pactl set-sink-input-volume $i {}%; done")))
+      (label :class "empty" :visible {arraylength(audio.apps) == 0} :text "silence"))))
+
+(defwindow mixer
+  :monitor "XF253Q"
+  :geometry (geometry :x "10px" :y "6px" :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (mixer))

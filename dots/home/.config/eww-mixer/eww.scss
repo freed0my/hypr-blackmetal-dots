@@ -1,0 +1,81 @@
+// Matches waybar: kitty blackmetal, borders like inactive Hyprland windows
+$bg:       #080708;
+$surface:  #211D21;
+$frame:    #2D2D2D;
+$text:     #C4C0C4;
+$text-sec: #8C858C;
+$text-dim: #3A353A;
+$accent:   #E0DCE0;
+$wine:     #A8324D;
+
+* {
+  all: unset;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+}
+
+window {
+  background-color: transparent;
+}
+
+.mixer {
+  background-color: $bg;
+  border: 2px solid $frame;
+  border-radius: 4px;
+  padding: 10px 14px 12px 14px;
+  min-width: 280px;
+}
+
+.device {
+  color: $text-sec;
+  font-size: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid $frame;
+}
+.device:hover { color: $accent; }
+.hint { color: $text-dim; margin-left: 8px; }
+
+.channel {
+  margin: 4px 0 6px 0;
+
+  .name  { color: $text-sec; }
+  .value { color: $text; margin-left: 10px; }
+
+  &.muted .name,
+  &.muted .value { color: $text-dim; }
+}
+.channel .name:hover { color: $accent; }
+
+.rule {
+  min-height: 1px;
+  background-color: $frame;
+  margin: 6px 0 4px 0;
+}
+
+.slider {
+  margin-top: 4px;
+  padding: 6px 0;
+
+  trough {
+    min-height: 2px;
+    background-color: $frame;
+  }
+  highlight {
+    background-color: $text-sec;
+  }
+  slider {
+    min-width: 10px;
+    min-height: 10px;
+    margin: -4px 0;
+    background-color: $accent;
+    border-radius: 2px;
+  }
+}
+.channel.muted .slider highlight { background-color: $text-dim; }
+.channel.muted .slider slider    { background-color: $text-sec; }
+
+.empty {
+  color: $text-dim;
+  margin-top: 6px;
+}

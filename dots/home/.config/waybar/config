@@ -1,0 +1,153 @@
+{
+    "output": "DP-1",
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 6,
+    "margin-top": 8,
+    "margin-left": 10,
+    "margin-right": 10,
+    "modules-left": [
+        "custom/logo",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "group/stats",
+        "hyprland/language",
+        "network",
+        "pulseaudio"
+    ],
+    "custom/logo": {
+        "format": "󰣇",
+        "tooltip": false,
+        "on-click": "pkill -x rofi || rofi -show drun"
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "show-special": false,
+        "format": "{icon}",
+        "format-icons": {
+            "active": "󰝥",
+            "default": "󰝥",
+            "empty": "󰝦"
+        },
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 20,
+        "separate-outputs": true,
+        "rewrite": {
+            "": "󰇄  desktop",
+            "(.*) — Mozilla Firefox": "󰈹  $1",
+            "(.*) - Chromium": "󰊯  $1",
+            "(.*) - Spotify": "󰓇  $1",
+            "(.*) - Discord": "󰙯  $1",
+            "kitty": "󰆍  terminal"
+        }
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "󰃭  {:%A, %d %B}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "interval": 1,
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#E0DCE0'><b>{}</b></span>",
+                "days": "<span color='#8C858C'>{}</span>",
+                "weekdays": "<span color='#5B526E'><b>{}</b></span>",
+                "today": "<span color='#E0DCE0' background='#7F263C'><b>{}</b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "group/stats": {
+        "orientation": "horizontal",
+        "modules": [
+            "cpu",
+            "memory",
+            "temperature"
+        ]
+    },
+    "cpu": {
+        "format": "󰻠  {usage}%",
+        "interval": 2,
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "on-click": "kitty -e htop"
+    },
+    "memory": {
+        "format": "󰍛  {percentage}%",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+        "interval": 2,
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+    "temperature": {
+        "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 80,
+        "format": "󰔏  {temperatureC}°",
+        "format-critical": "󰔏  {temperatureC}°",
+        "interval": 2
+    },
+    "hyprland/language": {
+        "format": "󰌌  {}",
+        "format-en": "en",
+        "format-ru": "ru"
+    },
+    "network": {
+        "format-ethernet": "󰈀",
+        "format-wifi": "󰤨  {signalStrength}%",
+        "format-disconnected": "󰤭",
+        "tooltip-format-ethernet": "{ifname}  {ipaddr}\n󰇚 {bandwidthDownBits}  󰕒 {bandwidthUpBits}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n󰇚 {bandwidthDownBits}  󰕒 {bandwidthUpBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 2
+    },
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  mute",
+        "format-icons": {
+            "headphone": "󰋋",
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ]
+        },
+        "scroll-step": 2,
+        "max-volume": 150,
+        "tooltip-format": "{desc}\nLMB — mixer · RMB — mute · MMB — switch output · wheel — volume",
+        "on-click": "~/.config/eww-mixer/scripts/toggle.sh",
+        "on-click-middle": "~/.config/eww-mixer/scripts/next-sink.sh",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10,
+        "icons": {
+            "tray-icon tray app tray_1": "/home/rin/.local/share/icons/waybar-tray/tray-icon_tray_app_tray_1.png",
+            "steam": "/home/rin/.local/share/icons/waybar-tray/steam.png",
+            "Happ": "/home/rin/.local/share/icons/waybar-tray/Happ.png"
+        }
+    }
+}

@@ -1,0 +1,44 @@
+[global]
+    monitor = 0
+    follow = mouse
+    width = (250, 380)
+    height = (0, 200)
+    origin = top-right
+    offset = (16, 16)
+    notification_limit = 5
+    gap_size = 8
+    padding = 12
+    horizontal_padding = 14
+    frame_width = 1
+    corner_radius = 4
+    separator_height = 0
+    font = JetBrainsMono Nerd Font 11
+    format = "<b>%s</b>\n%b"
+    markup = full
+    alignment = left
+    icon_position = left
+    max_icon_size = 40
+    icon_corner_radius = 4
+    show_indicators = no
+    word_wrap = yes
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[urgency_low]
+    background = "#211D21"
+    foreground = "#8C858C"
+    frame_color = "#3A353A"
+    timeout = 5
+
+[urgency_normal]
+    background = "#080708"
+    foreground = "#C4C0C4"
+    frame_color = "#966B83"
+    timeout = 8
+
+[urgency_critical]
+    background = "#080708"
+    foreground = "#E0DCE0"
+    frame_color = "#A8324D"
+    timeout = 0

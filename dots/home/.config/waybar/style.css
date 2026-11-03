@@ -1,0 +1,161 @@
+/* Borders like Hyprland windows, colors from kitty blackmetal (Gothic Cathedral) */
+@define-color frame     #2D2D2D;
+@define-color bg        #080708;
+@define-color surface   #211D21;
+@define-color text      #C4C0C4;
+@define-color text-sec  #8C858C;
+@define-color text-dim  #3A353A;
+@define-color accent    #E0DCE0;
+@define-color mauve     #966B83;
+@define-color warn      #9B8068;
+@define-color crit      #A8324D;
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+tooltip {
+    background: @bg;
+    border: 2px solid @frame;
+    border-radius: 4px;
+}
+tooltip label {
+    color: @text;
+    padding: 4px;
+}
+
+/* ── "islands" ───────────────────────────── */
+#custom-logo,
+#workspaces,
+#window,
+#clock,
+#tray,
+#stats,
+#language,
+#network,
+#pulseaudio {
+    background: transparent;
+    border: 2px solid @frame;
+    border-radius: 4px;
+    padding: 0 14px;
+}
+
+window#waybar.empty #window {
+    background: transparent;
+    border-color: transparent;
+}
+
+/* ── left ───────────────────────────────────── */
+#custom-logo {
+    color: @accent;
+    font-size: 17px;
+    padding: 0 15px 0 13px;
+}
+
+#workspaces {
+    padding: 0 6px;
+}
+#workspaces button {
+    color: @text-dim;
+    background: transparent;
+    /* the Nerd Font icon glyph is shifted 2px right — compensate */
+    padding: 0 9px 0 5px;
+    margin: 5px 1px;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+}
+#workspaces button:not(.empty) {
+    color: @text-sec;
+}
+#workspaces button.active {
+    color: @bg;
+    background: @accent;
+    padding: 0 16px 0 12px;
+}
+#workspaces button:hover {
+    color: @text;
+    background: @surface;
+    box-shadow: none;
+}
+#workspaces button.active:hover {
+    color: @bg;
+    background: @accent;
+}
+#workspaces button.urgent {
+    color: @bg;
+    background: @crit;
+}
+
+#window {
+    color: @text-sec;
+    /* fixed width so the left block equals the right one and the clock looks centered */
+    min-width: 168px; /* 20 chars × 8.4px */
+}
+
+/* ── center ────────────────────────────────── */
+#clock {
+    color: @accent;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 0 20px;
+}
+
+/* ── right ─────────────────────────────────── */
+#stats {
+    padding: 0 6px;
+}
+#cpu,
+#memory,
+#temperature {
+    color: @text-sec;
+    padding: 0 8px;
+}
+
+#cpu.warning, #memory.warning   { color: @warn; }
+#cpu.critical, #memory.critical,
+#temperature.critical           { color: @crit; }
+
+#language {
+    color: @text-sec;
+}
+
+#network {
+    color: @text;
+}
+#network.disconnected {
+    color: @crit;
+}
+
+#pulseaudio {
+    color: @accent;
+    padding: 0 15px 0 13px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#custom-logo:hover,
+#pulseaudio:hover,
+#clock:hover {
+    background: @surface;
+}
+
+#pulseaudio.muted {
+    color: @text-dim;
+}

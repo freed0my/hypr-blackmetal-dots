@@ -1,0 +1,104 @@
+/*
+ * Rofi — waybar style
+ * Border like inactive Hyprland windows, colors from kitty blackmetal
+ */
+
+* {
+    bg:        #080708;
+    surface:   #211D21;
+    frame:     #2D2D2D;
+    text:      #C4C0C4;
+    text-sec:  #8C858C;
+    text-dim:  #3A353A;
+    accent:    #E0DCE0;
+    wine:      #A8324D;
+
+    background-color: transparent;
+    text-color:       @text;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    width:            26em;
+    location:         center;
+    anchor:           center;
+    background-color: @bg;
+    border:           2px;
+    border-color:     @frame;
+    border-radius:    4px;
+    padding:          0;
+}
+
+mainbox {
+    orientation: vertical;
+    spacing:     0;
+    children:    [ inputbar, listview ];
+}
+
+inputbar {
+    padding:      12px 14px 6px 14px;
+    children:     [ entry ];
+}
+
+prompt {
+    text-color: @wine;
+}
+
+entry {
+    text-color:        @accent;
+    cursor:            text;
+    placeholder:       "";
+    placeholder-color: @text-dim;
+}
+
+listview {
+    padding:   6px 8px 8px 8px;
+    columns:   1;
+    lines:     6;
+    spacing:   2px;
+    scrollbar: false;
+    dynamic:   true;
+    cycle:     true;
+}
+
+element {
+    padding:       6px 8px;
+    spacing:       10px;
+    border-radius: 2px;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @text-sec;
+}
+
+element selected.normal,
+element selected.active {
+    background-color: @surface;
+    text-color:       @accent;
+}
+
+element normal.active,
+element alternate.active {
+    text-color: @text;
+}
+
+element normal.urgent,
+element alternate.urgent,
+element selected.urgent {
+    text-color: @wine;
+}
+
+element-icon {
+    size:             1.1em;
+    vertical-align:   0.5;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align:   0.5;
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        bold;
+}
