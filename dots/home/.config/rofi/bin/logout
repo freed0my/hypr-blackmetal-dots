@@ -63,7 +63,7 @@ run_cmd() {
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 			elif [[ "$XDG_SESSION_DESKTOP" == 'Hyprland' ]]; then
                 pkill gammastep
-                hyprctl dispatch exit
+                hyprctl dispatch 'hl.dsp.exit()'
 			fi
 		fi
 	else

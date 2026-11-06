@@ -98,6 +98,6 @@ case ${chosen} in
         ;;
     $logout)
 		run_cmd --logout
-		hyprctl dispatch exit
+		hyprctl dispatch 'hl.dsp.exit()'
         ;;
 esac

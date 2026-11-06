@@ -102,6 +102,18 @@ ask "Proceed?" || exit 0
 
 [ "$SKIP_PKGS" = 0 ] && install_pkgs
 
+# ── Hyprland version: the config is Lua (hyprland.lua) ───────
+MIN_HYPR=0.57
+if command -v Hyprland >/dev/null; then
+    HYPR_VER=$(Hyprland --version 2>/dev/null | awk 'NR==1{print $2}')
+    if [ "$(printf '%s\n%s\n' "$MIN_HYPR" "$HYPR_VER" | sort -V | head -n1)" != "$MIN_HYPR" ]; then
+        warn "Hyprland $HYPR_VER is older than $MIN_HYPR and may not read hyprland.lua"
+        ask "Install the configs anyway?" || exit 0
+    fi
+else
+    warn "Hyprland is not installed yet (needs $MIN_HYPR or newer)"
+fi
+
 # ── back up and copy user configs ──────────────────────────
 BK="$HOME/.dots-backup-$(date +%Y%m%d-%H%M%S)"
 c "→ Configs (backup in $BK)"
@@ -128,6 +140,13 @@ done || true
 chmod +x "$HOME"/.config/hypr/scripts/*.sh "$HOME"/.config/waybar/scripts/* \
          "$HOME"/.config/rofi/bin/* "$HOME"/.config/rofi/*.sh "$HOME"/.config/eww-mixer/scripts/* 2>/dev/null || true
 ok "configs in place"
+if command -v Hyprland >/dev/null; then
+    if Hyprland --verify-config -c "$HOME/.config/hypr/hyprland.lua" 2>&1 | grep -qx 'config ok'; then
+        ok "hyprland.lua is valid"
+    else
+        warn "hyprland.lua did not pass the check — run: Hyprland --verify-config -c ~/.config/hypr/hyprland.lua"
+    fi
+fi
 
 # ── system: GTK theme, cursor, SDDM ──────────────────────────
 c "→ System themes (sudo required)"
@@ -185,7 +204,7 @@ fi
 echo
 c "  Done ✓"
 echo "  • Reboot — SDDM (blackmetal) will greet you, pick the Hyprland session."
-echo "  • Monitors are set for DP-1 240Hz + HDMI-A-1: ~/.config/hypr/hyprland.conf (Monitor Setup section)"
+echo "  • Monitors are set for DP-1 240Hz + HDMI-A-1: ~/.config/hypr/hyprland.lua (MONITORS section)"
 echo "    and \"output\": \"DP-1\" in ~/.config/waybar/config — adjust if your hardware differs."
 echo "  • Waybar tray icons: after launching your apps run ~/.config/waybar/scripts/mono-tray.py"
 echo "  • Old configs backup: $BK"

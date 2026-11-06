@@ -46,7 +46,7 @@ tooltip label {
 #language,
 #network,
 #pulseaudio {
-    background: transparent;
+    background: #000000;
     border: 2px solid @frame;
     border-radius: 4px;
     padding: 0 14px;
