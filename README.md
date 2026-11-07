@@ -1,6 +1,6 @@
 <div align="center">
 
-#  hypr blackmeta dots 
+#  hypr blackmetal dots 
 
 **A minimalist monochrome Hyprland rice for Arch Linux.**
 Black stone, old silver, wine and muted violet. No neon, no noise.
